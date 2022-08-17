@@ -2,6 +2,8 @@
 
 > "O algoritmo de Luhn foi desenvolvido por Hans Peter Luhn, da IBM, em 1954. Ele é capaz de detectar um erro simples em um dígito, assim como a maioria das transposições de um dígito com os dígitos adjacentes." - Inf UFRGS
 
+[Problem Set 1 - credito](https://github.com/DevTrzJbr/uvv_ling_prog_cc3m/blob/main/pset-1/credito.pdf)
+
 Este projeto consiste em validar cartões de crédito seguindo o critério de validação do algoritmo de Luhn e também descobrindo a bandeira a qual o cartão pertence; 
 
 Podendo retornar:
