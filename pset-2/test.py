@@ -1,15 +1,25 @@
 #!/usr/bin/env python3
 
 import os
-import lab
+from typing import Final
+import pset2
 import unittest
+
+from PIL import Image, ImageFilter
+
+from PIL.ImageFilter import (
+   BLUR, CONTOUR, DETAIL, EDGE_ENHANCE, EDGE_ENHANCE_MORE,
+   EMBOSS, FIND_EDGES, SMOOTH, SMOOTH_MORE, SHARPEN
+)
+  
+
 
 TEST_DIRECTORY = os.path.dirname(__file__)
 
 class TestImage(unittest.TestCase):
     def test_load(self):
-        result = lab.Image.load('test_images/centered_pixel.png')
-        expected = lab.Image(11, 11,
+        result = pset2.Image.load('test_images/centered_pixel.png')
+        expected = pset2.Image(11, 11,
                              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                               0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                               0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -22,13 +32,18 @@ class TestImage(unittest.TestCase):
                               0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                               0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
         self.assertEqual(result, expected)
+        
+        image = Image.open('test_images/cat.png')
+        image.show()
+        image1 = image.filter(FIND_EDGES)
+        image1.show()
 
 
 class TestInverted(unittest.TestCase):
     def test_inverted_1(self):
-        im = lab.Image.load('test_images/centered_pixel.png')
+        im = pset2.Image.load('test_images/centered_pixel.png')
         result = im.inverted()
-        expected = lab.Image(11, 11,
+        expected = pset2.Image(11, 11,
                              [255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
                               255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
                               255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
@@ -51,8 +66,8 @@ class TestInverted(unittest.TestCase):
             with self.subTest(f=fname):
                 inpfile = os.path.join(TEST_DIRECTORY, 'test_images', '%s.png' % fname)
                 expfile = os.path.join(TEST_DIRECTORY, 'test_results', '%s_invert.png' % fname)
-                result = lab.Image.load(inpfile).inverted()
-                expected = lab.Image.load(expfile)
+                result = pset2.Image.load(inpfile).inverted()
+                expected = pset2.Image.load(expfile)
                 self.assertEqual(result,  expected)
 
 
@@ -63,10 +78,10 @@ class TestFilters(unittest.TestCase):
                 with self.subTest(k=kernsize, f=fname):
                     inpfile = os.path.join(TEST_DIRECTORY, 'test_images', '%s.png' % fname)
                     expfile = os.path.join(TEST_DIRECTORY, 'test_results', '%s_blur_%02d.png' % (fname, kernsize))
-                    input_img = lab.Image.load(inpfile)
-                    input_img_copy = lab.Image(input_img.width, input_img.height, input_img.pixels)
+                    input_img = pset2.Image.load(inpfile)
+                    input_img_copy = pset2.Image(input_img.width, input_img.height, input_img.pixels)
                     result = input_img.blurred(kernsize)
-                    expected = lab.Image.load(expfile)
+                    expected = pset2.Image.load(expfile)
                     self.assertEqual(input_img, input_img_copy, "Be careful not to modify the original image!")
                     self.assertEqual(result,  expected)
 
@@ -76,10 +91,10 @@ class TestFilters(unittest.TestCase):
                 with self.subTest(k=kernsize, f=fname):
                     inpfile = os.path.join(TEST_DIRECTORY, 'test_images', '%s.png' % fname)
                     expfile = os.path.join(TEST_DIRECTORY, 'test_results', '%s_sharp_%02d.png' % (fname, kernsize))
-                    input_img = lab.Image.load(inpfile)
-                    input_img_copy = lab.Image(input_img.width, input_img.height, input_img.pixels)
+                    input_img = pset2.Image.load(inpfile)
+                    input_img_copy = pset2.Image(input_img.width, input_img.height, input_img.pixels)
                     result = input_img.sharpened(kernsize)
-                    expected = lab.Image.load(expfile)
+                    expected = pset2.Image.load(expfile)
                     self.assertEqual(input_img, input_img_copy, "Be careful not to modify the original image!")
                     self.assertEqual(result,  expected)
 
@@ -88,10 +103,10 @@ class TestFilters(unittest.TestCase):
             with self.subTest(f=fname):
                 inpfile = os.path.join(TEST_DIRECTORY, 'test_images', '%s.png' % fname)
                 expfile = os.path.join(TEST_DIRECTORY, 'test_results', '%s_edges.png' % fname)
-                input_img = lab.Image.load(inpfile)
-                input_img_copy = lab.Image(input_img.width, input_img.height, input_img.pixels)
+                input_img = pset2.Image.load(inpfile)
+                input_img_copy = pset2.Image(input_img.width, input_img.height, input_img.pixels)
                 result = input_img.edges()
-                expected = lab.Image.load(expfile)
+                expected = pset2.Image.load(expfile)
                 self.assertEqual(input_img, input_img_copy, "Be careful not to modify the original image!")
                 self.assertEqual(result,  expected)
 

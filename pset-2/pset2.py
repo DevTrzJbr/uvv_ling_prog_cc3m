@@ -16,23 +16,33 @@ class Image:
         self.height = height
         self.pixels = pixels
 
+    # meu método
+    def get_index_pixel(self, x, y):
+        tamanho = self.width
+        return x*tamanho + y
+        
+    
     def get_pixel(self, x, y):
-        return self.pixels[x, y]
+        index = self.get_index_pixel(x, y)
+        return self.pixels[index]
 
     def set_pixel(self, x, y, c):
-        self.pixels[x, y] = c
+        index = self.get_index_pixel(x, y)
+        self.pixels[index] = c
 
     def apply_per_pixel(self, func):
         result = Image.new(self.height, self.width)
         for x in range(result.width):
             for y in range(result.height):
                 color = self.get_pixel(x, y)
+                # print(f"color: {color} x: {x} y: {y}")
                 newcolor = func(color)
-            result.set_pixel(y, x, newcolor)
+                # print(f"nova cor: {newcolor}")
+                result.set_pixel(y, x, newcolor)
         return result
 
     def inverted(self):
-        return self.apply_per_pixel(lambda c: 256-c)
+        return self.apply_per_pixel(lambda c: 255-c)
 
     def blurred(self, n):
         raise NotImplementedError
@@ -42,7 +52,6 @@ class Image:
 
     def edges(self):
         raise NotImplementedError
-
 
     # Below this point are utilities for loading, saving, and displaying
     # images, as well as for testing.
