@@ -19,7 +19,7 @@ class Image:
     # meu método
     def get_index_pixel(self, x, y):
         tamanho = self.width
-        return x*tamanho + y
+        return (y*tamanho) + x
         
     
     def get_pixel(self, x, y):
@@ -31,14 +31,14 @@ class Image:
         self.pixels[index] = c
 
     def apply_per_pixel(self, func):
-        result = Image.new(self.height, self.width)
-        for x in range(result.width):
-            for y in range(result.height):
+        result = Image.new(self.width, self.height)
+        for y in range(result.height):
+            for x in range(result.width):
                 color = self.get_pixel(x, y)
-                # print(f"color: {color} x: {x} y: {y}")
+                # print(f"x: {x} y: {y}")
                 newcolor = func(color)
                 # print(f"nova cor: {newcolor}")
-                result.set_pixel(y, x, newcolor)
+                result.set_pixel(x, y, newcolor)
         return result
 
     def inverted(self):
