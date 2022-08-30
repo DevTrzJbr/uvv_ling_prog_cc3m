@@ -18,8 +18,8 @@ class Image:
 
     # meu método
     def get_index_pixel(self, x, y):
-        tamanho = self.width
-        return (y*tamanho) + x
+        altura = self.width
+        return (y * altura) + x
         
     
     def get_pixel(self, x, y):
