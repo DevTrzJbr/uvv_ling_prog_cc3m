@@ -32,11 +32,6 @@ class TestImage(unittest.TestCase):
                               0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                               0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
         self.assertEqual(result, expected)
-        
-        image = Image.open('test_images/cat.png')
-        image.show()
-        image1 = image.filter(FIND_EDGES)
-        image1.show()
 
 
 class TestInverted(unittest.TestCase):
@@ -59,7 +54,12 @@ class TestInverted(unittest.TestCase):
 
     def test_inverted_2(self):
         # REPLACE THIS from your test case from section 3.1
-        self.assertTrue(False)
+        im = pset2.Image.new(4,1)
+        im.pixels = [29, 89, 136, 200]
+        im.save("branco.png")
+        result = im.inverted()
+        result.save("branco_inv.png")
+        self.assertTrue(im.inverted() == result )
 
     def test_inverted_images(self):
         for fname in ('mushroom', 'twocats', 'chess'):
