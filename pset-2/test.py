@@ -72,6 +72,20 @@ class TestInverted(unittest.TestCase):
 
 
 class TestFilters(unittest.TestCase):
+    def test_correlate(self):
+        
+        im = pset2.Image.load('test_images/chess.png')
+        im.save("test_results/img.png")
+        
+        kernel = [[ 0.00, -0.07,  0.00],
+                  [-0.45,  1.20, -0.25],
+                  [ 0.00, -0.12,  0.00]]
+        
+        result = im.correlate(kernel) 
+        result.save('test_results/img_correlated.png')
+        
+        self.assertTrue(im.correlate(kernel) == result )
+
     def test_blurred(self):
         for kernsize in (1, 3, 7):
             for fname in ('mushroom', 'twocats', 'chess'):
