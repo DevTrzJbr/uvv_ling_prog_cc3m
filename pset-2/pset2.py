@@ -15,12 +15,10 @@ class Image:
         self.width = width
         self.height = height
         self.pixels = pixels
-
-    # meu método
+ 
     def get_index_pixel(self, x, y):
         altura = self.width
         return (y * altura) + x
-        
     
     def get_pixel(self, x, y):
         index = self.get_index_pixel(x, y)
@@ -29,22 +27,47 @@ class Image:
     def set_pixel(self, x, y, c):
         index = self.get_index_pixel(x, y)
         self.pixels[index] = c
-
+        
+    def get_pixel_extend(self, x, y):
+        if x > self.width-1:
+            x = self.width-1
+        elif x < 0:
+            x = 0
+        if y > self.height-1:
+            y = self.height-1
+        elif y < 0:
+            y = 0
+        return self.get_pixel(x ,y)
+  
     def apply_per_pixel(self, func):
         result = Image.new(self.width, self.height)
         for y in range(result.height):
             for x in range(result.width):
                 color = self.get_pixel(x, y)
-                # print(f"x: {x} y: {y}")
-                newcolor = func(color)
-                # print(f"nova cor: {newcolor}")
+                newcolor = func(color, x, y)
                 result.set_pixel(x, y, newcolor)
         return result
 
     def inverted(self):
         return self.apply_per_pixel(lambda c: 255-c)
+    
+    def correlate(self, kernel):
+        result = Image.new(self.width, self.height) # cria uma nova imagem de correlação
+        meio_kernel = len(kernel)//2 # pega o meio do kernel
+        
+        for y in range(self.height):
+            for x in range(self.width):
+                correlation = 0 # valor de correlação da imagem com kernel
+                
+                for yk in range(len(kernel)):
+                    for xk in range(len(kernel[yk])):
+                        x1 = x - meio_kernel + xk
+                        y1 = y - meio_kernel + yk
+                        correlation += self.get_pixel_extend(x1, y1) * kernel[xk][yk]
+                result.set_pixel(x, y, correlation)
+        return result
 
-    def blurred(self, n):
+    def blurred(self):
         raise NotImplementedError
 
     def sharpened(self, n):
