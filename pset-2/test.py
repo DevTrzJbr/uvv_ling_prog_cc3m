@@ -56,16 +56,16 @@ class TestInverted(unittest.TestCase):
         # REPLACE THIS from your test case from section 3.1
         im = pset2.Image.new(4,1)
         im.pixels = [29, 89, 136, 200]
-        im.save("branco.png")
+        im.save("my_tests/branco.png")
         result = im.inverted()
-        result.save("branco_inv.png")
+        result.save("my_tests/branco_inv.png")
         self.assertTrue(im.inverted() == result )
         
     def test_inverted_3(self):
         im = pset2.Image.load('test_images/chess.png')
-        im.save("chess.png")
+        im.save("my_tests/chess.png")
         result = im.inverted()
-        result.save("chess_inv.png")
+        result.save("my_tests/chess_inv.png")
         self.assertTrue(im.inverted() == result )
 
     def test_inverted_images(self):
@@ -95,7 +95,7 @@ class TestFilters(unittest.TestCase):
         
     def test_blurred_1(self):
         im = pset2.Image.load('test_images/cat.png')
-        im.save('cat.png')
+        im.save('my_tests/cat.png')
         
         # kernel = [[0, 1, 0, 0, 0],
         #           [0, 0, 0, 0, 0],
@@ -104,12 +104,12 @@ class TestFilters(unittest.TestCase):
         #           [0.5, 0, 0, 0, 0]]
         
         result = im.blurred(5)
-        result.save('img.png')
+        result.save('my_tests/cat_blur.png')
         self.assertNotEqual(result, im)
         
     def test_sharpened_1(self):
         im = pset2.Image.load('test_images/cat.png')
-        im.save('cat.png')
+        im.save('my_tests/cat.png')
         
         # kernel = [[0, 1, 0, 0, 0],
         #           [0, 0, 0, 0, 0],
@@ -118,7 +118,7 @@ class TestFilters(unittest.TestCase):
         #           [0.5, 0, 0, 0, 0]]
         
         result = im.sharpened(2)
-        result.save('img.png')
+        result.save('my_tests/cat_sharp.png')
         self.assertNotEqual(result, im)
     
 
@@ -150,7 +150,7 @@ class TestFilters(unittest.TestCase):
                     
     def test_edges_1(self):
         im = pset2.Image.load('test_images/twocats.png')
-        im.save('twocats.png')
+        im.save('my_tests/twocats.png')
         
         # kernel = [[0, 1, 0, 0, 0],
         #           [0, 0, 0, 0, 0],
@@ -159,7 +159,7 @@ class TestFilters(unittest.TestCase):
         #           [0.5, 0, 0, 0, 0]]
         
         result = im.edges()
-        result.save('img.png')
+        result.save('my_tests/twocats_edges.png')
         self.assertNotEqual(result, im)
 
     def test_edges(self):
