@@ -56,7 +56,7 @@ class Image:
     
     def valid_pixels(self):
         for i in range(len(self.pixels)):
-            self.pixels[i] = int(self.pixels[i])
+            self.pixels[i] = int(round(self.pixels[i]))
             if self.pixels[i] < 0:
                 self.pixels[i] = 0
             elif self.pixels[i] > 255:
@@ -75,8 +75,8 @@ class Image:
                         x1 = x - meio_kernel + xk
                         y1 = y - meio_kernel + yk
                         correlation += self.get_pixel_extend(x1, y1) * kernel[xk][yk]
-                result.set_pixel(x, y, (round(correlation)))
-        result.valid_pixel()
+                result.set_pixel(x, y, correlation)
+        result.valid_pixels()
         return result
 
     def blurred(self, n):
@@ -93,8 +93,8 @@ class Image:
         for y in range(self.height):
             for x in range(self.width):
                 color = 2 * self.get_pixel(x, y) - blurred.get_pixel(x, y)
-                result.set_pixel(x, y, round(color))
-        result.valid_pixel()
+                result.set_pixel(x, y, color)
+        result.valid_pixels()
         return result
 
 
