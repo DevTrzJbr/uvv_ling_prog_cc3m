@@ -47,7 +47,7 @@ class Image:
         for y in range(result.height):
             for x in range(result.width):
                 color = self.get_pixel(x, y)
-                newcolor = func(color, x, y)
+                newcolor = func(color)
                 result.set_pixel(x, y, newcolor)
         return result
 
@@ -67,7 +67,7 @@ class Image:
                         x1 = x - meio_kernel + xk
                         y1 = y - meio_kernel + yk
                         correlation += self.get_pixel_extend(x1, y1) * kernel[xk][yk]
-                result.set_pixel(x, y, correlation)
+                result.set_pixel(x, y, round(correlation))
         return result
 
     def blurred(self, n):
@@ -84,7 +84,7 @@ class Image:
         for y in range(self.height):
             for x in range(self.width):
                 color = 2 * self.get_pixel(x, y) - blurred.get_pixel(x, y)
-                result.set_pixel(x, y, color)
+                result.set_pixel(x, y, round(color))
         return result
 
 
