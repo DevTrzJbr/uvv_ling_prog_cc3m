@@ -10,6 +10,9 @@ from PIL import Image as PILImage
 
 ## NO ADDITIONAL IMPORTS ALLOWED!
 
+def k_blur(n):
+        return [[1 / (n ** 2) for x in range(n)]for x in range(n)]
+
 class Image:
     def __init__(self, width, height, pixels):
         self.width = width
@@ -67,8 +70,12 @@ class Image:
                 result.set_pixel(x, y, correlation)
         return result
 
-    def blurred(self):
-        raise NotImplementedError
+    def blurred(self, n):
+        
+        kernel = k_blur(n)
+        
+        result = self.correlate(kernel)
+        return result
 
     def sharpened(self, n):
         raise NotImplementedError
