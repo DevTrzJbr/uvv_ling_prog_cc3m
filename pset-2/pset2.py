@@ -6,6 +6,7 @@ import base64
 import tkinter
 
 from io import BytesIO
+from unittest import result
 from PIL import Image as PILImage
 
 ## NO ADDITIONAL IMPORTS ALLOWED!
@@ -47,13 +48,21 @@ class Image:
         for y in range(result.height):
             for x in range(result.width):
                 color = self.get_pixel(x, y)
-                newcolor = func(color, x, y)
+                newcolor = func(color)
                 result.set_pixel(x, y, newcolor)
         return result
 
     def inverted(self):
         return self.apply_per_pixel(lambda c: 255-c)
     
+    def valid_pixels(self):
+        for i in range(len(self.pixels)):
+            self.pixels[i] = int(round(self.pixels[i]))
+            if self.pixels[i] < 0:
+                self.pixels[i] = 0
+            elif self.pixels[i] > 255:
+                self.pixels[i] = 255
+                
     def correlate(self, kernel):
         result = Image.new(self.width, self.height) # cria uma nova imagem de correlação
         meio_kernel = len(kernel)//2 # pega o meio do kernel
@@ -75,13 +84,40 @@ class Image:
         kernel = k_blur(n)
         
         result = self.correlate(kernel)
+        result.valid_pixels()
         return result
 
     def sharpened(self, n):
-        raise NotImplementedError
+        result = Image.new(self.width, self.height)
+        blurred = self.correlate(k_blur(n))
+        
+        for y in range(self.height):
+            for x in range(self.width):
+                color = 2 * self.get_pixel(x, y) - blurred.get_pixel(x, y)
+                result.set_pixel(x, y, color)
+        result.valid_pixels()
+        return result
 
     def edges(self):
-        raise NotImplementedError
+        result = Image.new(self.width, self.height)
+        
+        kx = [[-1, 0, 1],
+              [-2, 0, 2],
+              [-1, 0, 1]]
+        
+        ky = [[-1, -2, -1],
+              [ 0,  0,  0],
+              [ 1,  2,  1]]
+        
+        ox = self.correlate(kx)
+        oy = self.correlate(ky)
+        
+        for y in range(self.height):
+            for x in range(self.width):
+                color = ((ox.get_pixel(x, y))**2 + (oy.get_pixel(x, y))**2)**0.5
+                result.set_pixel(x, y, color)
+        result.valid_pixels()
+        return result
 
     # Below this point are utilities for loading, saving, and displaying
     # images, as well as for testing.
