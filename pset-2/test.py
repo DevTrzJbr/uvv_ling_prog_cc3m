@@ -184,12 +184,6 @@ class TestFilters(unittest.TestCase):
         im = pset2.Image.load('test_images/twocats.png')
         im.save('my_tests/twocats.png')
         
-        # kernel = [[0, 1, 0, 0, 0],
-        #           [0, 0, 0, 0, 0],
-        #           [0, 0, 0, 0, 0],
-        #           [0, 0, 0, 0.5, 0],
-        #           [0.5, 0, 0, 0, 0]]
-        
         result = im.edges()
         result.save('my_tests/twocats_edges.png')
         self.assertNotEqual(result, im)
