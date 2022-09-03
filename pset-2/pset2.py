@@ -6,6 +6,7 @@ import base64
 import tkinter
 
 from io import BytesIO
+from unittest import result
 from PIL import Image as PILImage
 
 ## NO ADDITIONAL IMPORTS ALLOWED!
@@ -76,7 +77,6 @@ class Image:
                         y1 = y - meio_kernel + yk
                         correlation += self.get_pixel_extend(x1, y1) * kernel[xk][yk]
                 result.set_pixel(x, y, correlation)
-        result.valid_pixels()
         return result
 
     def blurred(self, n):
@@ -97,9 +97,26 @@ class Image:
         result.valid_pixels()
         return result
 
-
     def edges(self):
-        raise NotImplementedError
+        result = Image.new(self.width, self.height)
+        
+        kx = [[-1, 0, 1],
+              [-2, 0, 2],
+              [-1, 0, 1]]
+        
+        ky = [[-1, -2, -1],
+              [ 0,  0,  0],
+              [ 1,  2,  1]]
+        
+        ox = self.correlate(kx)
+        oy = self.correlate(ky)
+        
+        for y in range(self.height):
+            for x in range(self.width):
+                color = ((ox.get_pixel(x, y))**2 + (oy.get_pixel(x, y))**2)**0.5
+                result.set_pixel(x, y, color)
+        result.valid_pixels()
+        return result
 
     # Below this point are utilities for loading, saving, and displaying
     # images, as well as for testing.
