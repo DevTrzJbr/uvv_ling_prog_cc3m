@@ -196,6 +196,23 @@ class TestFilters(unittest.TestCase):
         result = im.edges()
         result.save('my_tests/construcao_edges.png')
         self.assertNotEqual(result, im)
+                
+    def test_edges_steps(self):
+        im = pset2.Image.load('test_images/construct.png')
+        kx = [[-1, 0, 1],
+              [-2, 0, 2],
+              [-1, 0, 1]]
+        
+        ky = [[-1, -2, -1],
+              [ 0,  0,  0],
+              [ 1,  2,  1]]
+        
+        result = im.correlate(kx)
+        result.save('my_tests/edges/edge_kx.png')
+        result = im.correlate(ky)
+        result.save('my_tests/edges/edge_ky.png')
+        result = im.edges()
+        result.save('my_tests/edges/complete_edges.png')
 
     def test_edges(self):
         for fname in ('mushroom', 'twocats', 'chess'):
