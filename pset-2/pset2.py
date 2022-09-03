@@ -54,6 +54,14 @@ class Image:
     def inverted(self):
         return self.apply_per_pixel(lambda c: 255-c)
     
+    def valid_pixels(self):
+        for i in range(len(self.pixels)):
+            self.pixels[i] = int(self.pixels[i])
+            if self.pixels[i] < 0:
+                self.pixels[i] = 0
+            elif self.pixels[i] > 255:
+                self.pixels[i] = 255
+                
     def correlate(self, kernel):
         result = Image.new(self.width, self.height) # cria uma nova imagem de correlação
         meio_kernel = len(kernel)//2 # pega o meio do kernel
@@ -67,7 +75,8 @@ class Image:
                         x1 = x - meio_kernel + xk
                         y1 = y - meio_kernel + yk
                         correlation += self.get_pixel_extend(x1, y1) * kernel[xk][yk]
-                result.set_pixel(x, y, round(correlation))
+                result.set_pixel(x, y, (round(correlation)))
+        result.valid_pixel()
         return result
 
     def blurred(self, n):
@@ -85,6 +94,7 @@ class Image:
             for x in range(self.width):
                 color = 2 * self.get_pixel(x, y) - blurred.get_pixel(x, y)
                 result.set_pixel(x, y, round(color))
+        result.valid_pixel()
         return result
 
 
