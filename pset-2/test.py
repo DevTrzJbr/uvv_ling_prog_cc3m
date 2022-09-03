@@ -140,6 +140,20 @@ class TestFilters(unittest.TestCase):
                     expected = pset2.Image.load(expfile)
                     self.assertEqual(input_img, input_img_copy, "Be careful not to modify the original image!")
                     self.assertEqual(result,  expected)
+                    
+    def test_edges_1(self):
+        im = pset2.Image.load('test_images/twocats.png')
+        im.save('twocats.png')
+        
+        # kernel = [[0, 1, 0, 0, 0],
+        #           [0, 0, 0, 0, 0],
+        #           [0, 0, 0, 0, 0],
+        #           [0, 0, 0, 0.5, 0],
+        #           [0.5, 0, 0, 0, 0]]
+        
+        result = im.edges()
+        result.save('img.png')
+        self.assertNotEqual(result, im)
 
     def test_edges(self):
         for fname in ('mushroom', 'twocats', 'chess'):
