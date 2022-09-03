@@ -32,6 +32,24 @@ class TestImage(unittest.TestCase):
                               0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                               0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
         self.assertEqual(result, expected)
+        
+    def test_pig(self):
+        im = pset2.Image.load('test_images/pigbird.png')
+        im.save('my_tests/pig.png')
+        
+        kernel =    [[0, 0, 0, 0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                     [1, 0, 0, 0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 0, 0]]
+        
+        result = im.correlate(kernel)
+        result.save('my_tests/pig_correlated.png')
+        self.assertIsNot(im, result)
 
 
 class TestInverted(unittest.TestCase):
