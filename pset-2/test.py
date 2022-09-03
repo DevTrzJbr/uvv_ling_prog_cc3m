@@ -143,9 +143,16 @@ class TestFilters(unittest.TestCase):
         #           [0.5, 0, 0, 0, 0]]
         
         result = im.sharpened(2)
-        result.save('my_tests/cat_sharp.png')
+        result.save('my_tests/cat_sharpened.png')
         self.assertNotEqual(result, im)
     
+    def test_sharpened_2(self):
+        im = pset2.Image.load('test_images/python.png')
+        im.save('my_tests/python.png')
+                
+        result = im.sharpened(11)
+        result.save('my_tests/python_sharpened.png')
+        self.assertNotEqual(result, im)
 
     def test_blurred(self):
         for kernsize in (1, 3, 7):
