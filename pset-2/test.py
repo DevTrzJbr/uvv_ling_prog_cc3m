@@ -60,6 +60,13 @@ class TestInverted(unittest.TestCase):
         result = im.inverted()
         result.save("branco_inv.png")
         self.assertTrue(im.inverted() == result )
+        
+    def test_inverted_3(self):
+        im = pset2.Image.load('test_images/chess.png')
+        im.save("chess.png")
+        result = im.inverted()
+        result.save("chess_inv.png")
+        self.assertTrue(im.inverted() == result )
 
     def test_inverted_images(self):
         for fname in ('mushroom', 'twocats', 'chess'):
