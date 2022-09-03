@@ -8,7 +8,6 @@ import tkinter
 from io import BytesIO
 from PIL import Image as PILImage
 
-
 ## NO ADDITIONAL IMPORTS ALLOWED!
 
 def k_blur(n):
