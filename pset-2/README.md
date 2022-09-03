@@ -45,3 +45,30 @@ Qual será o valor do pixel na imagem de saída no meio da matriz de pixel?
  - resultado = 0 + (-3.71) + 0 + (-58.05) + 152.4 + (-37) + 0 + 0 + (-20.88) + 0
 
 - **resultado = 32.76**
+
+## Questão 4
+
+Quando você tiver implementado seu código, tente executá-lo em imagens_teste/porco.png com o seguinte kernel 9 × 9:
+
+|0 |0 |0 |0 |0 |0 |0 |0 |0|
+|-|-|-|-|-|-|-|-|-|
+|0 |0 |0 |0 |0 |0 |0 |0 |0|
+|1 |0 |0 |0 |0 |0 |0 |0 |0|
+|0 |0 |0 |0 |0 |0 |0 |0 |0|
+|0 |0 |0 |0 |0 |0 |0 |0 |0|
+|0 |0 |0 |0 |0 |0 |0 |0 |0|
+|0 |0 |0 |0 |0 |0 |0 |0 |0|
+|0 |0 |0 |0 |0 |0 |0 |0 |0|
+|0 |0 |0 |0 |0 |0 |0 |0 |0|
+
+Ao rodar esse kernel, salve a imagem resultante em seu repositório GitHub.
+
+![porco](https://github.com/DevTrzJbr/uvv_ling_prog_cc3m/blob/main/pset-2/my_tests/pig.png)
+![porco correlacionado](https://github.com/DevTrzJbr/uvv_ling_prog_cc3m/blob/main/pset-2/my_tests/pig_correlated.png)
+
+Porco &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Porco correlacionado
+
+## Questão 5 
+
+Se quisermos usar uma versão desfocada B que foi feita com um kernel de desfoque de caixa de 3 × 3, que kernel k poderíamos usar para calcular toda a imagem nítida com uma única correlação?
+
