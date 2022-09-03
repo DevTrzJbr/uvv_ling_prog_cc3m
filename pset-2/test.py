@@ -2,6 +2,7 @@
 
 import os
 from typing import Final
+from unittest import result
 import pset2
 import unittest
 
@@ -186,6 +187,14 @@ class TestFilters(unittest.TestCase):
         
         result = im.edges()
         result.save('my_tests/twocats_edges.png')
+        self.assertNotEqual(result, im)
+        
+    def test_edges_2(self):
+        im = pset2.Image.load('test_images/construct.png')
+        im.save('my_tests/construcao.png')
+        
+        result = im.edges()
+        result.save('my_tests/construcao_edges.png')
         self.assertNotEqual(result, im)
 
     def test_edges(self):
