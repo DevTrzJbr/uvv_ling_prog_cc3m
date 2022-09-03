@@ -85,6 +85,22 @@ class TestFilters(unittest.TestCase):
         result.save('test_results/img_correlated.png')
         
         self.assertTrue(im.correlate(kernel) == result )
+        
+    def test_blurred_1(self):
+        im = pset2.Image.load('test_images/cat.png')
+        
+        im.save('cat.png')
+        
+        # kernel = [[0, 1, 0, 0, 0],
+        #           [0, 0, 0, 0, 0],
+        #           [0, 0, 0, 0, 0],
+        #           [0, 0, 0, 0.5, 0],
+        #           [0.5, 0, 0, 0, 0]]
+        
+        result = im.blurred(5)
+        
+        result.save('img.png')
+        self.assertNotEqual(result, im)
 
     def test_blurred(self):
         for kernsize in (1, 3, 7):
