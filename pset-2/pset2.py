@@ -84,6 +84,7 @@ class Image:
         kernel = k_blur(n)
         
         result = self.correlate(kernel)
+        result.valid_pixels()
         return result
 
     def sharpened(self, n):
