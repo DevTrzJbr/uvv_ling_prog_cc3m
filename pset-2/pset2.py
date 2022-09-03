@@ -78,7 +78,15 @@ class Image:
         return result
 
     def sharpened(self, n):
-        raise NotImplementedError
+        result = Image.new(self.width, self.height)
+        blurred = self.correlate(k_blur(n))
+        
+        for y in range(self.height):
+            for x in range(self.width):
+                color = 2 * self.get_pixel(x, y) - blurred.get_pixel(x, y)
+                result.set_pixel(x, y, color)
+        return result
+
 
     def edges(self):
         raise NotImplementedError
