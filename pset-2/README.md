@@ -72,3 +72,9 @@ Porco &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&e
 
 Se quisermos usar uma versão desfocada B que foi feita com um kernel de desfoque de caixa de 3 × 3, que kernel k poderíamos usar para calcular toda a imagem nítida com uma única correlação?
 
+Execute seu filtro de nitidez na imagem imagens_teste/python.png usando um kernel de tamanho 11
+
+![python](https://github.com/DevTrzJbr/uvv_ling_prog_cc3m/blob/main/pset-2/my_tests/python.png)
+![python nítido](https://github.com/DevTrzJbr/uvv_ling_prog_cc3m/blob/main/pset-2/my_tests/python_sharpened.png)
+
+Python &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Python nítido
