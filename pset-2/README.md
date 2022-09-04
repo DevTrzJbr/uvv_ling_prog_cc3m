@@ -1,6 +1,8 @@
-# PSET2 - Filtragem de imagem por meio de transformações por pixel
+# PSET2 - Processamento de Imagens
 
-[Estudo do problema](https://www.notion.so/jvbook/pset2-24ccee7bc3cb4c9492f1c2783871be5c)
+Aqui nos [Estudos do problema](https://www.notion.so/jvbook/pset2-24ccee7bc3cb4c9492f1c2783871be5c) você encontrará um documento na plataforma [Notion](https://www.notion.so/) explicando cada detalhe do que foi feito ao longo dos problemas propóstos.
+
+Veja meu testes na pasta [my_tests](https://github.com/DevTrzJbr/uvv_ling_prog_cc3m/blob/main/pset-2/my_tests)
 
 
 ## Questões do PSET
@@ -78,3 +80,61 @@ Execute seu filtro de nitidez na imagem imagens_teste/python.png usando um kerne
 ![python nítido](https://github.com/DevTrzJbr/uvv_ling_prog_cc3m/blob/main/pset-2/my_tests/python_sharpened.png)
 
 Python &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Python nítido
+
+## Questão 6
+
+![edges_kx](https://github.com/DevTrzJbr/uvv_ling_prog_cc3m/blob/main/pset-2/test_images/construct.png)
+
+|-1 |0 |1|
+|-|-|-|
+|-2 |0 |2|
+|-1 |0 |1|
+
+kx (bordas do eixo X)
+
+![edges_kx](https://github.com/DevTrzJbr/uvv_ling_prog_cc3m/blob/main/pset-2/my_tests/edges/edge_kx.png)
+
+|-1|-2|-1|
+|-|-|-|
+| 0| 0| 0|
+| 1| 2| 1|
+
+kY (bordas do eixo Y)
+
+![edges_ky](https://github.com/DevTrzJbr/uvv_ling_prog_cc3m/blob/main/pset-2/my_tests/edges/edge_ky.png)
+
+A correlação da imagem com "kx" deixa em mais evidencia as bordas no eixo X (horizontal) e em "ky" ocorre o mesmo mas evidenciando mais o eixo Y (vertical)
+
+Calculo da borda
+```
+Ox,y = round(√Ox²x,y + Oy²x,y)
+
+```
+
+
+Ao aplicar o calculo para correlacionar as duas novas imagens, sai uma nova imagem com suas bordas em evidencia:
+
+![edges_ky](https://github.com/DevTrzJbr/uvv_ling_prog_cc3m/blob/main/pset-2/my_tests/edges/complete_edges.png)
+
+
+## Pastas de imagens
+
+- [Meus testes](https://github.com/DevTrzJbr/uvv_ling_prog_cc3m/blob/main/pset-2/my_tests)
+- [Imagens de testes](https://github.com/DevTrzJbr/uvv_ling_prog_cc3m/blob/main/pset-2/test_images)
+- [Imagens de resultado](https://github.com/DevTrzJbr/uvv_ling_prog_cc3m/blob/main/pset-2/test_results)
+
+
+## Autor
+
+- [@DevTrzJbr](https://www.github.com/DevTrzJbr) João Víctor de A Antunes 
+
+## Professor
+
+- [@abrantesasf](https://www.github.com/abrantesasf) Abrantes Araújo Silva Filho 
+
+## Licença
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+
+
